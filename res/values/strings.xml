@@ -1,0 +1,20 @@
+<resources>
+
+    <string name="app_name">MoodSpaces</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="NewMoodButton">New Mood</string>
+    <string name="statsString">Stats:</string>
+    <string name="SpotsButton">MoodSpots</string>
+    <string name="TimesButton">MoodTimes</string>
+    <string name="PeepsButton">MoodPeeps</string>
+    <string name="title_activity_input">InputActivity</string>
+    <string name="OKButton">OK</string>
+    <string name="Wheel_Of_Plutchik">Wheel of Plutchik</string>
+    <string name="title_activity_mood_spots">MoodSpotsActivity</string>
+    <string name="todo">TODO</string>
+    <string name="title_activity_mood_times">MoodTimesActivity</string>
+    <string name="title_activity_mood_peeps">MoodPeepsActivity</string>
+
+</resources>
