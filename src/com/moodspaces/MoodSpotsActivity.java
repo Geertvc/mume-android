@@ -4,6 +4,11 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
+/**
+ * Activity that shows the mood data combined with the location.
+ * 
+ * @author Geert Van Campenhout
+ */
 public class MoodSpotsActivity extends Activity {
 
     @Override

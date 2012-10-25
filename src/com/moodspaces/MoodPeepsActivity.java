@@ -4,6 +4,11 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
+/**
+ * Activity that shows the mood data combined with the people that were present at that moment.
+ * 
+ * @author Geert Van Campenhout
+ */
 public class MoodPeepsActivity extends Activity {
 
     @Override

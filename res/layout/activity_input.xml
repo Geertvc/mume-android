@@ -1,16 +1,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@layout/background" >
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:src="@drawable/wheel_of_plutchik" 
         android:contentDescription="@string/Wheel_Of_Plutchik"/>
+    
+    <ImageView
+        android:id="@+id/realImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/Wheel_Of_Plutchik"
+        android:src="@drawable/wheel_of_plutchik" />
 
     <Button
         android:id="@+id/submitButton"
@@ -18,13 +28,41 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/OKButton" />
+        android:text="@string/OKButton"
+        android:onClick="saveMoodData" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/activitySpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/submitButton"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/activitySpinner"
+        android:layout_alignBottom="@+id/activitySpinner"
+        android:layout_toLeftOf="@+id/activitySpinner"
+        android:text="@string/activityString"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Spinner
+        android:id="@+id/locationSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/activitySpinner"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/locationSpinner"
+        android:layout_alignBottom="@+id/locationSpinner"
+        android:layout_toLeftOf="@+id/locationSpinner"
+        android:text="@string/locationString"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

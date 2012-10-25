@@ -4,6 +4,11 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
+/**
+ * Activity that shows the mood data combined with the time.
+ * 
+ * @author Geert Van Campenhout
+ */
 public class MoodTimesActivity extends Activity {
 
     @Override
