@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.moodspaces.model.MoodData;
+import com.moodspaces.model.MoodSelection;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -49,8 +50,9 @@ public class InputActivity extends Activity implements OnTouchListener {
 			Color.rgb(0, 205, 102)};
 	private float padding = 20f;
 	private float radius;
-	float centerX;
-	float centerY;
+	private float centerX;
+	private float centerY;
+	private ArrayList<MoodSelection> selectedMoods;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,7 @@ public class InputActivity extends Activity implements OnTouchListener {
 		initPlutchikWheelImageView();
 		initTouchImageView();
 		moodData = new MoodData();
+		selectedMoods = new ArrayList<MoodSelection>();
 	}
 	
 	/**
@@ -195,6 +198,7 @@ public class InputActivity extends Activity implements OnTouchListener {
 			centeredY = downy - centerY;
 			r = (float) Math.sqrt(Math.pow(centeredX, 2) + Math.pow(centeredY, 2));
 			if(r <= radius){
+				//TODO hier moet gecheckt worden of er al een mood is die dichtbij is en dan die verwijderen uit te lijst zodanig dat een user een mood kan verplaatsen.
 				drawMood();
 			}
 			break;
@@ -241,15 +245,14 @@ public class InputActivity extends Activity implements OnTouchListener {
 	 * @param theta	The theta coordinate of the mood selection.
 	 */
 	private void saveMoodSelection(float r, float theta) {
-		// TODO Auto-generated method stub
-		
+		selectedMoods.add(new MoodSelection(r, theta));
 	}
 	
 	/**
 	 * This method is called when the Ok button at the bottom of the inputActivity is clicked.
 	 */
 	public void saveMoodData(View view){
-		//TODO
+		//TODO save the mood data
 		System.out.println("MoodData should be saved here.");
 		Intent intent = new Intent(this, MainActivity.class);
     	startActivity(intent);
