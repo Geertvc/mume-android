@@ -24,14 +24,14 @@ public class WheelView extends ViewGroup {
 
     /* @formatter:off */
 	private String[] moodLabels = {
-		"fear", 
 		"surprise", 
-		"sadness", 
-		"disgust", 
-		"anger", 
-		"anticipation", 
+		"fear", 
+		"trust",
 		"joy", 
-		"trust"
+		"anticipation", 
+		"anger",
+		"disgust", 
+		"sadness" 
 	};
 	private int[] moodColors = {
 		Color.rgb(0,   123, 51), 
@@ -136,6 +136,7 @@ public class WheelView extends ViewGroup {
         final float unitRotation = 360 / moodLabels.length;
         final float pivotX = bounds.centerX();
         final float pivotY = bounds.centerY();
+        
         canvas.save();
         canvas.rotate(3f / 2 * unitRotation, pivotX, pivotY);
         for (int i = 0; i < moodLabels.length / 2; i++) {
