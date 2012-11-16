@@ -8,19 +8,19 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
-public class MoodPeepsActivity extends SherlockActivity {
+public class MoodTasksActivity extends SherlockActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_moodpeeps);
-		getSupportActionBar().setTitle(R.string.title_activity_moodpeeps);
+		setContentView(R.layout.activity_moodtasks);
+		getSupportActionBar().setTitle(R.string.title_activity_moodtasks);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getSupportMenuInflater().inflate(R.menu.activity_moodpeeps, menu);
+		getSupportMenuInflater().inflate(R.menu.activity_moodtasks, menu);
 		return true;
 	}
 	

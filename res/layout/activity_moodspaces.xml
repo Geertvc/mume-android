@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:padding="5dp" >
+    
+    <TextView
+        android:id="@+id/text_stats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="@string/title_stats"
+        android:textSize="16dp"
+        android:paddingBottom="10dp"
+        android:textAllCaps="true" />
+
+    <Button
+        android:id="@+id/button_moodspots"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/text_stats"
+        android:text="@string/title_activity_moodspots" />
+
+    <Button
+        android:id="@+id/button_moodpeeps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/button_moodspots"
+        android:text="@string/title_activity_moodpeeps"  />
+
+    <Button
+        android:id="@+id/button_moodtimes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/button_moodpeeps"
+        android:text="@string/title_activity_moodtimes" />
+
+    <Button
+        android:id="@+id/button_moodtasks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/button_moodtimes"
+        android:text="@string/title_activity_moodtasks"
+        android:enabled="false" />
+
+</RelativeLayout>

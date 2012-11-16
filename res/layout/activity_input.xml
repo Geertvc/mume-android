@@ -1,68 +1,59 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollview_input"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@layout/background" >
+    android:layout_height="match_parent" 
+    android:fillViewport="true" >
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/wheel_of_plutchik" 
-        android:contentDescription="@string/Wheel_Of_Plutchik"/>
-    
-    <ImageView
-        android:id="@+id/realImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:contentDescription="@string/Wheel_Of_Plutchik"
-        android:src="@drawable/wheel_of_plutchik" />
+        android:padding="5dp" >
 
-    <Button
-        android:id="@+id/submitButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/OKButton"
-        android:onClick="saveMoodData" />
+        <com.moodspaces.view.WheelView
+            android:id="@+id/wheelview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:padding="10dp" >
+        </com.moodspaces.view.WheelView>
 
-    <Spinner
-        android:id="@+id/activitySpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/submitButton"
-        android:layout_centerHorizontal="true" />
+        <Button
+            android:id="@+id/button_location_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/wheelview" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/activitySpinner"
-        android:layout_alignBottom="@+id/activitySpinner"
-        android:layout_toLeftOf="@+id/activitySpinner"
-        android:text="@string/activityString"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <Spinner
+            android:id="@+id/spinner_location"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/button_location_add"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/button_location_add" />
 
-    <Spinner
-        android:id="@+id/locationSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/activitySpinner"
-        android:layout_centerHorizontal="true" />
+        <Button
+            android:id="@+id/button_task_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/button_location_add" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/locationSpinner"
-        android:layout_alignBottom="@+id/locationSpinner"
-        android:layout_toLeftOf="@+id/locationSpinner"
-        android:text="@string/locationString"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <Spinner
+            android:id="@+id/spinner_task"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/button_task_add"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/button_task_add" />
 
-</RelativeLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button_task_add"
+            android:text="@string/button_input" />
+    </RelativeLayout>
+
+</ScrollView>

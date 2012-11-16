@@ -1,28 +1,42 @@
 package com.moodspaces.model;
 
-public class MoodSelection {
-	
-	private float r;
-	private float theta;
-	
-	public MoodSelection(float r, float theta){
-		this.r = r;
-		this.theta = theta;
-	}
+import java.util.Observable;
 
-	public float getR() {
-		return r;
-	}
+public class MoodSelection extends Observable {
 
-	public void setR(float r) {
-		this.r = r;
-	}
+    public enum Event {
+        CHANGED_R, CHANGED_THETA
+    }
 
-	public float getTheta() {
-		return theta;
-	}
+    private double r;
+    private double theta;
 
-	public void setPhi(float theta) {
-		this.theta = theta;
-	}
+    public MoodSelection() {
+        this(0, 0);
+    }
+
+    public MoodSelection(double r, double theta) {
+        this.r = r;
+        this.theta = theta;
+    }
+
+    public double getR() {
+        return r;
+    }
+
+    public void setR(double r) {
+        if (r != getR() && r <= 1) {
+            this.r = r;
+        }
+    }
+
+    public double getTheta() {
+        return theta;
+    }
+
+    public void setTheta(double theta) {
+        if (theta != getTheta()) {
+            this.theta = theta;
+        }
+    }
 }

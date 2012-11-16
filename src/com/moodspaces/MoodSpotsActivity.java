@@ -1,25 +1,40 @@
 package com.moodspaces;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
-import android.view.Menu;
+import android.view.View;
 
-/**
- * Activity that shows the mood data combined with the location.
- * 
- * @author Geert Van Campenhout
- */
-public class MoodSpotsActivity extends Activity {
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mood_spots);
-    }
+public class MoodSpotsActivity extends SherlockActivity {
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_mood_spots, menu);
-        return true;
-    }
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_moodspots);
+		getSupportActionBar().setTitle(R.string.title_activity_moodspots);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getSupportMenuInflater().inflate(R.menu.activity_moodspots, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+			case android.R.id.home:
+				startActivity(new Intent(this, MoodSpacesActivity.class));
+				break;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+	public void startSettingsActivity(View view) {
+		startActivity(new Intent(this, SettingsActivity.class));
+	}
 }
