@@ -2,17 +2,27 @@ package com.moodspaces.model;
 
 import java.util.Observable;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "moodselection")
 public class MoodSelection extends Observable {
 
     public enum Event {
         CHANGED_R, CHANGED_THETA
     }
 
-    private double r;
-    private double theta;
+    @DatabaseField(generatedId = true)
+    private int id;
+    
+    @DatabaseField
+    private double r = 0d;
+    
+    @DatabaseField
+    private double theta = 0d;
 
     public MoodSelection() {
-        this(0, 0);
+        // ORMLite needs a no-arg constructor
     }
 
     public MoodSelection(double r, double theta) {

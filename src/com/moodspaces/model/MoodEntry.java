@@ -1,18 +1,31 @@
 package com.moodspaces.model;
 
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "entries")
 public class MoodEntry {
+    @DatabaseField(generatedId = true)
+    private int id;
+    
+    @DatabaseField(foreign = true)
 	private Activity activity;
+    
+    @DatabaseField(foreign = true)
 	private Location location;
-	private ArrayList<MoodSelection> moodEntries;
-	private ArrayList<People> people;
+    
+	@ForeignCollectionField
+	private Collection<MoodSelection> moodEntries = new HashSet<MoodSelection>();
+    
+	@ForeignCollectionField
+	private Collection<Person> people = new HashSet<Person>();
 	
-	public MoodEntry(ArrayList<MoodSelection> moodEntries, Location location, Activity activity, ArrayList<People> people){
-		this.moodEntries = moodEntries;
-		this.location = location;
-		this.activity = activity;
-		this.people = people;
+	public MoodEntry() {
+        // ORMLite needs a no-arg constructor
 	}
 
 	public Activity getActivity() {
@@ -31,19 +44,19 @@ public class MoodEntry {
 		this.location = location;
 	}
 
-	public ArrayList<MoodSelection> getMoodEntries() {
+	public Collection<MoodSelection> getMoodEntries() {
 		return moodEntries;
 	}
 
-	public void setMoodEntries(ArrayList<MoodSelection> moodEntries) {
+	public void setMoodEntries(Collection<MoodSelection> moodEntries) {
 		this.moodEntries = moodEntries;
 	}
 
-	public ArrayList<People> getPeople() {
+	public Collection<Person> getPeople() {
 		return people;
 	}
 
-	public void setPeople(ArrayList<People> people) {
+	public void setPeople(Collection<Person> people) {
 		this.people = people;
 	}
 }
