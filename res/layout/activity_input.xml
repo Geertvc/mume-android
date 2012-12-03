@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollview_input"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
+    android:layout_height="match_parent"
     android:fillViewport="true" >
 
     <RelativeLayout
@@ -11,7 +11,7 @@
         android:padding="5dp" >
 
         <com.moodspaces.view.WheelView
-            android:id="@+id/wheelview"
+            android:id="@+id/input_wheel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -19,40 +19,67 @@
             android:padding="10dp" >
         </com.moodspaces.view.WheelView>
 
-        <Button
-            android:id="@+id/button_location_add"
+        <ImageButton
+            android:id="@+id/input_button_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/wheelview" />
+            android:layout_below="@id/input_wheel"
+            android:contentDescription="@string/input_button_location_description"
+            android:onClick="showLocationDialog"
+            android:src="@android:drawable/ic_menu_add" />
 
         <Spinner
-            android:id="@+id/spinner_location"
+            android:id="@+id/input_spinner_location"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/button_location_add"
+            android:layout_alignBottom="@+id/input_button_location"
             android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/button_location_add" />
+            android:layout_toLeftOf="@+id/input_button_location"
+            android:prompt="@string/input_spinner_location_prompt" />
 
-        <Button
-            android:id="@+id/button_task_add"
+        <ImageButton
+            android:id="@+id/input_button_people"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/button_location_add" />
+            android:layout_below="@+id/input_button_location"
+            android:contentDescription="@string/input_button_activity_description"
+            android:onClick="showPeopleDialog"
+            android:src="@android:drawable/ic_menu_more" />
 
-        <Spinner
-            android:id="@+id/spinner_task"
+        <TextView
+            android:id="@+id/input_text_people"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/button_task_add"
+            android:layout_alignBottom="@+id/input_button_people"
             android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/button_task_add" />
+            android:layout_toLeftOf="@+id/input_button_people" />
+
+        <ImageButton
+            android:id="@+id/input_button_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/input_button_people"
+            android:contentDescription="@string/input_button_activity_description"
+            android:onClick="showActivityDialog"
+            android:src="@android:drawable/ic_menu_add" />
+
+        <Spinner
+            android:id="@+id/input_spinner_activity"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/input_button_activity"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/input_button_activity"
+            android:prompt="@string/input_spinner_activity_prompt" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/button_task_add"
+            android:layout_below="@id/input_button_activity"
+            android:onClick="addEntry"
             android:text="@string/button_input" />
     </RelativeLayout>
 

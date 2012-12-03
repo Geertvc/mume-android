@@ -14,6 +14,7 @@ public class MoodTimesActivity extends SherlockActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_moodtimes);
+		getSupportActionBar().setTitle(R.string.moodtimes_activity_title);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 

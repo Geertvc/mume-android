@@ -12,33 +12,42 @@ public class Location {
     private String name;
 
     @DatabaseField
-    private float latitude;
+    private double latitude;
 
     @DatabaseField
-    private float longitude;
+    private double longitude;
 
     public Location() {
         // ORMLite needs a no-arg constructor
     }
 
-    public Location(float lat, float lon) {
+    public Location(String name, double lat, double lon) {
+        this.name = name;
         this.latitude = lat;
         this.longitude = lon;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(float latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(float longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
     }
 }

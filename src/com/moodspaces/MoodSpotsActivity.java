@@ -14,7 +14,7 @@ public class MoodSpotsActivity extends SherlockActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_moodspots);
-		getSupportActionBar().setTitle(R.string.title_activity_moodspots);
+		getSupportActionBar().setTitle(R.string.moodspots_activity_title);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 

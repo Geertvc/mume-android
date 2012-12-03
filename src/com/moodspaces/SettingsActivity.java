@@ -11,7 +11,7 @@ public class SettingsActivity extends SherlockActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_settings);
-		getSupportActionBar().setTitle(R.string.title_activity_settings);
+		getSupportActionBar().setTitle(R.string.settings_activity_title);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 	
