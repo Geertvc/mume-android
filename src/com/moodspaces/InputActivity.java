@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -118,15 +117,10 @@ public class InputActivity extends AbstractActivity implements LocationListener 
     public void createLocation(String locationName) {
         try {
             if (!locationName.equals("") && currentLocation != null) {
-                MoodSpacesService svc = getService();
-                Log.d(getClass().getSimpleName(), svc == null ? "service = null" : "service = " + svc.toString());
-                if (svc != null) {
-                    svc.createLocation(new Location(locationName, currentLocation.getLatitude(), currentLocation
-                            .getLongitude()));
-                }
+                getService().createLocation(
+                        new Location(locationName, currentLocation.getLatitude(), currentLocation.getLongitude()));
             } else {
-                // TODO: inform user that location is not created, perhaps with
-                // a Toast
+                Toast.makeText(this, "Failed to create location", Toast.LENGTH_SHORT).show();
             }
         } catch (NotBoundException e) {
             // Should not happen...

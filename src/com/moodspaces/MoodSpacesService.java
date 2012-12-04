@@ -9,7 +9,6 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.j256.ormlite.dao.Dao;
 import com.moodspaces.database.DatabaseHelper;
 import com.moodspaces.model.Location;
 
@@ -18,10 +17,6 @@ public class MoodSpacesService extends Service {
     private MoodSpacesBinder binder = new MoodSpacesBinder();
     private DatabaseHelper helper;
 
-    public MoodSpacesService() {
-        helper = new DatabaseHelper(this);
-    }
-    
     public DatabaseHelper getHelper() {
         return helper;
     }
@@ -31,9 +26,8 @@ public class MoodSpacesService extends Service {
     }
 
     public void createLocation(Location location) {
-        Dao<Location, Integer> dao = getHelper().getLocationDao();
         try {
-            dao.create(location);
+            getHelper().getLocationDao().create(location);
             Toast.makeText(this, "Location created!", Toast.LENGTH_SHORT).show();
         } catch (SQLException e) {
             // TODO Inform user of failure
@@ -43,6 +37,7 @@ public class MoodSpacesService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
+        helper = new DatabaseHelper(this);
         Log.d(getClass().getSimpleName(), "Bind Request Received!");
         return binder;
     }
