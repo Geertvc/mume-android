@@ -1,55 +1,59 @@
 package com.moodspaces.model;
 
-import java.util.Observable;
+import java.util.HashSet;
+import java.util.Set;
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
+import com.orm.androrm.Model;
+import com.orm.androrm.field.DoubleField;
 
-@DatabaseTable(tableName = "moodselection")
-public class MoodSelection extends Observable {
+public class MoodSelection extends Model {
 
-    public enum Event {
-        CHANGED_R, CHANGED_THETA
-    }
+    protected DoubleField r = new DoubleField();
+    protected DoubleField theta = new DoubleField();
 
-    @DatabaseField(generatedId = true)
-    private int id;
-    
-    @DatabaseField
-    private double r = 0d;
-    
-    @DatabaseField
-    private double theta = 0d;
-    
-    @DatabaseField(foreign = true)
-    private MoodEntry entry;
+    private Set<MoodSelectionListener> listeners = new HashSet<MoodSelectionListener>();
 
     public MoodSelection() {
-        // ORMLite needs a no-arg constructor
+        this(0, 0);
     }
 
     public MoodSelection(double r, double theta) {
-        this.r = r;
-        this.theta = theta;
+        super();
+        setR(r);
+        setTheta(theta);
     }
 
     public double getR() {
-        return r;
+        return r.get();
     }
 
     public void setR(double r) {
         if (r != getR() && r <= 1) {
-            this.r = r;
+            this.r.set(r);
+
+            for (MoodSelectionListener listener : listeners) {
+                listener.onUpdateR(r);
+            }
         }
     }
 
     public double getTheta() {
-        return theta;
+        return theta.get();
     }
 
     public void setTheta(double theta) {
         if (theta != getTheta()) {
-            this.theta = theta;
+            this.theta.set(theta);
+
+            for (MoodSelectionListener listener : listeners) {
+                listener.onUpdateTheta(theta);
+            }
         }
+    }
+
+    public interface MoodSelectionListener {
+        public void onUpdateR(double r);
+
+        public void onUpdateTheta(double theta);
     }
 }

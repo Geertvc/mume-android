@@ -5,13 +5,16 @@ import android.content.Intent;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.moodspaces.exceptions.NotBoundException;
 import com.moodspaces.model.MoodSpot;
+import com.moodspaces.model.MoodTask;
 import com.moodspaces.view.ActivityDialog;
 import com.moodspaces.view.LocationDialog;
 import com.moodspaces.view.PeopleDialog;
@@ -26,12 +29,51 @@ public class InputActivity extends AbstractActivity implements LocationListener 
     private LocationManager locationManager;
     private android.location.Location currentLocation;
 
+    private Spinner moodSpotsSpinner;
+    private Spinner moodTasksSpinner;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input);
         getSupportActionBar().setTitle(R.string.input_activity_title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+    
+    @Override
+    protected void onStart() {
+        super.onStart();
+        
+        updateMoodSpots();
+        updateMoodTasks();
+    }
+
+    protected Spinner getMoodSpotsSpinner() {
+        if (moodSpotsSpinner == null) {
+            moodSpotsSpinner = (Spinner) findViewById(R.id.input_spinner_location);
+        }
+        return moodSpotsSpinner;
+    }
+
+    protected Spinner getMoodTasksSpinner() {
+        if (moodTasksSpinner == null) {
+            moodTasksSpinner = (Spinner) findViewById(R.id.input_spinner_activity);
+        }
+        return moodTasksSpinner;
+    }
+
+    protected void updateMoodTasks() {
+        Log.d(getClass().getSimpleName(), "Updating MoodTasks");
+        for (MoodTask task : MoodTask.findAll(getApplicationContext()).toList()) {
+            Log.i(getClass().getSimpleName(), task.toString());
+        }
+    }
+
+    protected void updateMoodSpots() {
+        Log.d(getClass().getSimpleName(), "Updating MoodSpots");
+        for (MoodSpot spot : MoodSpot.findAll(getApplicationContext()).toList()) {
+            Log.i(getClass().getSimpleName(), spot.toString());
+        }
     }
 
     @Override
@@ -77,11 +119,7 @@ public class InputActivity extends AbstractActivity implements LocationListener 
     }
 
     public void addEntry(View view) {
-        try {
-            getService().makeAToast();
-        } catch (NotBoundException e) {
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
+
     }
 
     public android.location.Location getCurrentLocation() {

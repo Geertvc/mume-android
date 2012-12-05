@@ -1,33 +1,21 @@
 package com.moodspaces.model;
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
+import com.orm.androrm.Model;
+import com.orm.androrm.field.CharField;
 
-@DatabaseTable(tableName = "people")
-public class MoodPerson {
-	
-    @DatabaseField
-    private int id;
-    
-    @DatabaseField
-    private String name;
-    
-    @DatabaseField(foreign = true)
-    private MoodEntry entry;
-    
+public class MoodPerson extends Model {
+
+    protected CharField name = new CharField();
+
     public MoodPerson() {
-        // ORMLite needs a no-arg constructor
+        super();
     }
-	
-	public MoodPerson(String name){
-		this.name = name;
-	}
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name.get();
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name.set(name);
+    }
 }

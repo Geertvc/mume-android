@@ -1,6 +1,7 @@
 package com.moodspaces;
 
-import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
 
 import android.app.Service;
 import android.content.Intent;
@@ -9,35 +10,44 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.moodspaces.database.DatabaseHelper;
+import com.moodspaces.model.MoodEntry;
+import com.moodspaces.model.MoodPerson;
+import com.moodspaces.model.MoodSelection;
 import com.moodspaces.model.MoodSpot;
+import com.moodspaces.model.MoodTask;
+import com.orm.androrm.DatabaseAdapter;
+import com.orm.androrm.Model;
 
 public class MoodSpacesService extends Service {
 
+    private static final String DB_NAME = "moodspaces.db";
+    
     private MoodSpacesBinder binder = new MoodSpacesBinder();
-    private DatabaseHelper helper;
+    private DatabaseAdapter adapter;
 
-    public DatabaseHelper getHelper() {
-        return helper;
-    }
-
-    public void makeAToast() {
-        Toast.makeText(this, "This is a toast!", Toast.LENGTH_SHORT).show();
-    }
-
-    public void createLocation(MoodSpot location) {
-        try {
-            getHelper().getLocationDao().create(location);
+    public void createLocation(MoodSpot moodSpot) {
+        if (moodSpot.save(getApplicationContext())) {
             Toast.makeText(this, "Location created!", Toast.LENGTH_SHORT).show();
-        } catch (SQLException e) {
-            // TODO Inform user of failure
-            Log.e(getClass().getSimpleName(), "Failed to create location!");
+            Log.i(getClass().getSimpleName(), "Location saved!");
+        } else {
+            Log.e(getClass().getSimpleName(), "Location not saved!");
         }
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        helper = new DatabaseHelper(this);
+        if (adapter == null) {
+            DatabaseAdapter.setDatabaseName(DB_NAME);
+            adapter = new DatabaseAdapter(getApplicationContext());
+//            Set<Class<? extends Model>> models = new HashSet<Class<? extends Model>>();
+//            models.add(MoodEntry.class);
+//            models.add(MoodPerson.class);
+//            models.add(MoodSelection.class);
+//            models.add(MoodSpot.class);
+//            models.add(MoodTask.class);
+//            adapter.setModels(models);
+        }
+
         Log.d(getClass().getSimpleName(), "Bind Request Received!");
         return binder;
     }

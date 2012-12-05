@@ -1,53 +1,58 @@
 package com.moodspaces.model;
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
+import android.content.Context;
 
-@DatabaseTable(tableName = "location")
-public class MoodSpot {
-    @DatabaseField(generatedId = true)
-    private int id;
-    
-    @DatabaseField(unique = true)
-    private String name;
+import com.orm.androrm.Model;
+import com.orm.androrm.QuerySet;
+import com.orm.androrm.field.CharField;
+import com.orm.androrm.field.DoubleField;
 
-    @DatabaseField
-    private double latitude;
-
-    @DatabaseField
-    private double longitude;
+public class MoodSpot extends Model {
+    protected CharField name = new CharField(/* optional length */);
+    protected DoubleField latitude = new DoubleField();
+    protected DoubleField longitude = new DoubleField();
 
     public MoodSpot() {
-        // ORMLite needs a no-arg constructor
+        // initialize ID's and stuff
+        super();
     }
 
-    public MoodSpot(String name, double lat, double lon) {
-        this.name = name;
-        this.latitude = lat;
-        this.longitude = lon;
+    public MoodSpot(String name, double latitude, double longitude) {
+        setName(name);
+        setLatitude(latitude);
+        setLongitude(longitude);
+    }
+
+    public String getName() {
+        return name.get();
+    }
+
+    public void setName(String name) {
+        this.name.set(name);
     }
 
     public double getLatitude() {
-        return latitude;
+        return latitude.get();
     }
 
     public void setLatitude(double latitude) {
-        this.latitude = latitude;
+        this.latitude.set(latitude);
     }
 
     public double getLongitude() {
-        return longitude;
+        return longitude.get();
     }
 
     public void setLongitude(double longitude) {
-        this.longitude = longitude;
+        this.longitude.set(longitude);
     }
     
-    public String getName() {
-        return name;
+    @Override
+    public String toString() {
+        return "[MoodSpot " + getId() + "] lat=" + getLatitude() + ",long=" + getLongitude();
     }
-    
-    public void setName(String name) {
-        this.name = name;
+
+    public static final QuerySet<MoodSpot> findAll(Context context) {
+        return objects(context, MoodSpot.class);
     }
 }

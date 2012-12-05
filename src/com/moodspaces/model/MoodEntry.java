@@ -1,62 +1,49 @@
 package com.moodspaces.model;
 
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.Date;
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.field.ForeignCollectionField;
-import com.j256.ormlite.table.DatabaseTable;
+import com.orm.androrm.Model;
+import com.orm.androrm.field.DateField;
+import com.orm.androrm.field.ForeignKeyField;
+import com.orm.androrm.field.ManyToManyField;
+import com.orm.androrm.field.OneToManyField;
 
-@DatabaseTable(tableName = "entries")
-public class MoodEntry {
-    @DatabaseField(generatedId = true)
-    private int id;
+public class MoodEntry extends Model {
+
+    protected DateField date = new DateField();
+    protected ForeignKeyField<MoodTask> moodTask = new ForeignKeyField<MoodTask>(MoodTask.class);
+    protected ForeignKeyField<MoodSpot> moodSpot = new ForeignKeyField<MoodSpot>(MoodSpot.class);
+    protected OneToManyField<MoodEntry, MoodSelection> moodSelections = new OneToManyField<MoodEntry, MoodSelection>(
+            MoodEntry.class, MoodSelection.class);
+    protected ManyToManyField<MoodEntry, MoodPerson> moodPeople = new ManyToManyField<MoodEntry, MoodPerson>(
+            MoodEntry.class, MoodPerson.class);
+
+    public MoodEntry() {
+        super();
+        setDate(new Date());
+    }
+
+    public Date getDate() {
+        return date.get();
+    }
     
-    @DatabaseField(foreign = true)
-	private MoodTask moodTask;
-    
-    @DatabaseField(foreign = true)
-	private MoodSpot moodSpot;
-    
-	@ForeignCollectionField
-	private Collection<MoodSelection> moodEntries = new HashSet<MoodSelection>();
-    
-	@ForeignCollectionField
-	private Collection<MoodPerson> people = new HashSet<MoodPerson>();
-	
-	public MoodEntry() {
-        // ORMLite needs a no-arg constructor
-	}
+    public void setDate(Date date) {
+        this.date.set(date);
+    }
 
-	public MoodTask getMoodTask() {
-		return moodTask;
-	}
+    public MoodTask getMoodTask() {
+        return moodTask.get();
+    }
 
-	public void setMoodTask(MoodTask moodTask) {
-		this.moodTask = moodTask;
-	}
+    public void setMoodTask(MoodTask moodTask) {
+        this.moodTask.set(moodTask);
+    }
 
-	public MoodSpot getMoodSpot() {
-		return moodSpot;
-	}
+    public MoodSpot getMoodSpot() {
+        return moodSpot.get();
+    }
 
-	public void setMoodSpot(MoodSpot moodSpot) {
-		this.moodSpot = moodSpot;
-	}
-
-	public Collection<MoodSelection> getMoodEntries() {
-		return moodEntries;
-	}
-
-	public void setMoodEntries(Collection<MoodSelection> moodEntries) {
-		this.moodEntries = moodEntries;
-	}
-
-	public Collection<MoodPerson> getPeople() {
-		return people;
-	}
-
-	public void setPeople(Collection<MoodPerson> people) {
-		this.people = people;
-	}
+    public void setMoodSpot(MoodSpot moodSpot) {
+        this.moodSpot.set(moodSpot);
+    }
 }

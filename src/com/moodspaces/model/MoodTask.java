@@ -1,30 +1,37 @@
 package com.moodspaces.model;
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
+import android.content.Context;
 
-@DatabaseTable(tableName = "activity")
-public class MoodTask {
+import com.orm.androrm.Model;
+import com.orm.androrm.QuerySet;
+import com.orm.androrm.field.CharField;
 
-    @DatabaseField(generatedId = true)
-    private int id;
-    
-    @DatabaseField(unique = true)
-	private String activity;
-	
+public class MoodTask extends Model {
+
+    protected CharField name = new CharField(/* optional max length */);
+
     public MoodTask() {
-        // ORMLite needs a no-arg constructor
+        super();
+    }
+
+    public MoodTask(String name) {
+        setName(name);
+    }
+
+    public String getName() {
+        return name.get();
+    }
+
+    public void setName(String name) {
+        this.name.set(name);
     }
     
-	public MoodTask(String activity){
-		this.activity = activity;
-	}
+    @Override
+    public String toString() {
+        return "[MoodTask " + getId() + "] " + getName();
+    }
 
-	public String getActivity() {
-		return activity;
-	}
-
-	public void setActivity(String activity) {
-		this.activity = activity;
-	}
+    public static QuerySet<MoodTask> findAll(Context context) {
+        return objects(context, MoodTask.class);
+    }
 }
