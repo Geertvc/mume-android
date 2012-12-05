@@ -10,7 +10,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.moodspaces.database.DatabaseHelper;
-import com.moodspaces.model.Location;
+import com.moodspaces.model.MoodSpot;
 
 public class MoodSpacesService extends Service {
 
@@ -25,7 +25,7 @@ public class MoodSpacesService extends Service {
         Toast.makeText(this, "This is a toast!", Toast.LENGTH_SHORT).show();
     }
 
-    public void createLocation(Location location) {
+    public void createLocation(MoodSpot location) {
         try {
             getHelper().getLocationDao().create(location);
             Toast.makeText(this, "Location created!", Toast.LENGTH_SHORT).show();

@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.moodspaces.exceptions.NotBoundException;
-import com.moodspaces.model.Location;
+import com.moodspaces.model.MoodSpot;
 import com.moodspaces.view.ActivityDialog;
 import com.moodspaces.view.LocationDialog;
 import com.moodspaces.view.PeopleDialog;
@@ -118,7 +118,7 @@ public class InputActivity extends AbstractActivity implements LocationListener 
         try {
             if (!locationName.equals("") && currentLocation != null) {
                 getService().createLocation(
-                        new Location(locationName, currentLocation.getLatitude(), currentLocation.getLongitude()));
+                        new MoodSpot(locationName, currentLocation.getLatitude(), currentLocation.getLongitude()));
             } else {
                 Toast.makeText(this, "Failed to create location", Toast.LENGTH_SHORT).show();
             }

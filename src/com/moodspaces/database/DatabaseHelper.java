@@ -11,20 +11,20 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import com.moodspaces.model.Activity;
-import com.moodspaces.model.Location;
+import com.moodspaces.model.MoodTask;
+import com.moodspaces.model.MoodSpot;
 import com.moodspaces.model.MoodEntry;
 import com.moodspaces.model.MoodSelection;
-import com.moodspaces.model.Person;
+import com.moodspaces.model.MoodPerson;
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final String DATABASE_NAME = "moodspaces.db";
     private static final int DATABASE_VERSION = 1;
 
     private Dao<MoodEntry, Integer> entriesDao = null;
-    private Dao<Activity, Integer> activityDao = null;
-    private Dao<Person, Integer> personDao = null;
-    private Dao<Location, Integer> locationDao = null;
+    private Dao<MoodTask, Integer> activityDao = null;
+    private Dao<MoodPerson, Integer> personDao = null;
+    private Dao<MoodSpot, Integer> locationDao = null;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -35,13 +35,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         // Don't call super.onCreate() or you'll get a StackOverflowException!
         Log.d(getClass().getSimpleName(), "Database " + db.getPath() + " created!");
         try {
-            TableUtils.createTable(conn, Activity.class);
+            TableUtils.createTable(conn, MoodTask.class);
             Log.d(getClass().getSimpleName(), "Activity table created");
-            TableUtils.createTable(conn, Location.class);
+            TableUtils.createTable(conn, MoodSpot.class);
             Log.d(getClass().getSimpleName(), "Location table created");
             TableUtils.createTable(conn, MoodSelection.class);
             Log.d(getClass().getSimpleName(), "MoodSelection table created");
-            TableUtils.createTable(conn, Person.class);
+            TableUtils.createTable(conn, MoodPerson.class);
             Log.d(getClass().getSimpleName(), "Person table created");
             TableUtils.createTable(conn, MoodEntry.class);
             Log.d(getClass().getSimpleName(), "MoodEntry table created");
@@ -68,23 +68,23 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return entriesDao;
     }
 
-    public Dao<Activity, Integer> getActivityDao() throws SQLException {
+    public Dao<MoodTask, Integer> getActivityDao() throws SQLException {
         if (activityDao == null) {
-            activityDao = DaoManager.createDao(connectionSource, Activity.class);
+            activityDao = DaoManager.createDao(connectionSource, MoodTask.class);
         }
         return activityDao;
     }
 
-    public Dao<Person, Integer> getPersonDao() throws SQLException {
+    public Dao<MoodPerson, Integer> getPersonDao() throws SQLException {
         if (personDao == null) {
-            personDao = DaoManager.createDao(connectionSource, Person.class);
+            personDao = DaoManager.createDao(connectionSource, MoodPerson.class);
         }
         return personDao;
     }
 
-    public Dao<Location, Integer> getLocationDao() throws SQLException {
+    public Dao<MoodSpot, Integer> getLocationDao() throws SQLException {
         if (locationDao == null) {
-            locationDao = DaoManager.createDao(connectionSource, Location.class);
+            locationDao = DaoManager.createDao(connectionSource, MoodSpot.class);
         }
         return locationDao;
     }

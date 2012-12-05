@@ -20,6 +20,9 @@ public class MoodSelection extends Observable {
     
     @DatabaseField
     private double theta = 0d;
+    
+    @DatabaseField(foreign = true)
+    private MoodEntry entry;
 
     public MoodSelection() {
         // ORMLite needs a no-arg constructor

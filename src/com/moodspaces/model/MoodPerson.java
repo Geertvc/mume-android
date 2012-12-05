@@ -4,7 +4,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "people")
-public class Person {
+public class MoodPerson {
 	
     @DatabaseField
     private int id;
@@ -12,11 +12,14 @@ public class Person {
     @DatabaseField
     private String name;
     
-    public Person() {
+    @DatabaseField(foreign = true)
+    private MoodEntry entry;
+    
+    public MoodPerson() {
         // ORMLite needs a no-arg constructor
     }
 	
-	public Person(String name){
+	public MoodPerson(String name){
 		this.name = name;
 	}
 

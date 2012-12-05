@@ -4,7 +4,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "location")
-public class Location {
+public class MoodSpot {
     @DatabaseField(generatedId = true)
     private int id;
     
@@ -17,11 +17,11 @@ public class Location {
     @DatabaseField
     private double longitude;
 
-    public Location() {
+    public MoodSpot() {
         // ORMLite needs a no-arg constructor
     }
 
-    public Location(String name, double lat, double lon) {
+    public MoodSpot(String name, double lat, double lon) {
         this.name = name;
         this.latitude = lat;
         this.longitude = lon;

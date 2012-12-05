@@ -13,35 +13,35 @@ public class MoodEntry {
     private int id;
     
     @DatabaseField(foreign = true)
-	private Activity activity;
+	private MoodTask moodTask;
     
     @DatabaseField(foreign = true)
-	private Location location;
+	private MoodSpot moodSpot;
     
 	@ForeignCollectionField
 	private Collection<MoodSelection> moodEntries = new HashSet<MoodSelection>();
     
 	@ForeignCollectionField
-	private Collection<Person> people = new HashSet<Person>();
+	private Collection<MoodPerson> people = new HashSet<MoodPerson>();
 	
 	public MoodEntry() {
         // ORMLite needs a no-arg constructor
 	}
 
-	public Activity getActivity() {
-		return activity;
+	public MoodTask getMoodTask() {
+		return moodTask;
 	}
 
-	public void setActivity(Activity activity) {
-		this.activity = activity;
+	public void setMoodTask(MoodTask moodTask) {
+		this.moodTask = moodTask;
 	}
 
-	public Location getLocation() {
-		return location;
+	public MoodSpot getMoodSpot() {
+		return moodSpot;
 	}
 
-	public void setLocation(Location location) {
-		this.location = location;
+	public void setMoodSpot(MoodSpot moodSpot) {
+		this.moodSpot = moodSpot;
 	}
 
 	public Collection<MoodSelection> getMoodEntries() {
@@ -52,11 +52,11 @@ public class MoodEntry {
 		this.moodEntries = moodEntries;
 	}
 
-	public Collection<Person> getPeople() {
+	public Collection<MoodPerson> getPeople() {
 		return people;
 	}
 
-	public void setPeople(Collection<Person> people) {
+	public void setPeople(Collection<MoodPerson> people) {
 		this.people = people;
 	}
 }
