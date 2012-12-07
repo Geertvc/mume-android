@@ -1,8 +1,13 @@
 package com.moodspaces.model;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
+import android.content.Context;
 
 import com.orm.androrm.Model;
+import com.orm.androrm.QuerySet;
 import com.orm.androrm.field.DateField;
 import com.orm.androrm.field.ForeignKeyField;
 import com.orm.androrm.field.ManyToManyField;
@@ -26,7 +31,7 @@ public class MoodEntry extends Model {
     public Date getDate() {
         return date.get();
     }
-    
+
     public void setDate(Date date) {
         this.date.set(date);
     }
@@ -45,5 +50,29 @@ public class MoodEntry extends Model {
 
     public void setMoodSpot(MoodSpot moodSpot) {
         this.moodSpot.set(moodSpot);
+    }
+
+    public static QuerySet<MoodEntry> objects(Context context) {
+        return objects(context, MoodEntry.class);
+    }
+
+    public void addSelections(Set<MoodSelection> selections) {
+        this.moodSelections.addAll(selections);
+    }
+
+    public void addSelection(MoodSelection selection) {
+        this.moodSelections.add(selection);
+    }
+
+    public QuerySet<MoodSelection> getMoodSelections(Context context) {
+        return this.moodSelections.get(context, this);
+    }
+
+    public void setMoodPeeps(List<MoodPerson> selectedMoodPeeps) {
+        this.moodPeople.addAll(selectedMoodPeeps);
+    }
+
+    public void addMoodPerson(MoodPerson person) {
+        this.moodPeople.add(person);
     }
 }

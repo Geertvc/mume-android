@@ -49,10 +49,10 @@ public class MoodSpot extends Model {
     
     @Override
     public String toString() {
-        return "[MoodSpot " + getId() + "] lat=" + getLatitude() + ",long=" + getLongitude();
+        return getName();
     }
 
-    public static final QuerySet<MoodSpot> findAll(Context context) {
+    public static final QuerySet<MoodSpot> objects(Context context) {
         return objects(context, MoodSpot.class);
     }
 }

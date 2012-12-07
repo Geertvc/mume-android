@@ -53,7 +53,6 @@ public class MoodSelection extends Model {
 
     public interface MoodSelectionListener {
         public void onUpdateR(double r);
-
         public void onUpdateTheta(double theta);
     }
 }

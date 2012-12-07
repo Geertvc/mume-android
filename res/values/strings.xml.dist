@@ -11,15 +11,13 @@
    		 	<activity name>_activity_title
     -->
 
-
     <!-- MoodSpaces Activity (Home Screen) Strings -->
     <string name="moodspaces_activity_title">MoodSpaces</string>
-    <string name="moodspaces_button_input_text"></string>
-    <string name="moodspaces_button_moodspots_text"></string>
-    <string name="moodspaces_button_moodpeeps_text"></string>
-    <string name="moodspaces_button_moodtimes_text"></string>
-    <string name="moodspaces_button_moodtasks_text"></string>
     <string name="moodspaces_text_stats_text">Stats</string>
+    <string name="moodspaces_button_moodspots_text">MoodSpots</string>
+    <string name="moodspaces_button_moodpeeps_text">MoodPeeps</string>
+    <string name="moodspaces_button_moodtimes_text">MoodTimes</string>
+    <string name="moodspaces_button_moodtasks_text">MoodTasks</string>
 
     <!-- Input Activity Strings -->
     <string name="input_activity_title">Enter Mood</string>
@@ -55,12 +53,12 @@
 
     <!-- People Dialog Strings -->
     <string name="dialog_people_title">Who are you with?</string>
-    <string name="dialog_people_button_positive">Add Location</string>
+    <string name="dialog_people_button_positive">OK</string>
     <string name="dialog_people_button_negative">Cancel</string>
 
     <!-- Activity Dialog Strings -->
     <string name="dialog_activity_title">Create New Activity</string>
-    <string name="dialog_activity_input_name">Name</string>
+    <string name="dialog_activity_input_hint">Activity name</string>
     <string name="dialog_activity_button_positive">Create Activity</string>
     <string name="dialog_activity_button_negative">Cancel</string>
     

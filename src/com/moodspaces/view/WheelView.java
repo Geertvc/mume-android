@@ -1,6 +1,7 @@
 package com.moodspaces.view;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -89,10 +90,10 @@ public class WheelView extends ViewGroup {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int diameter = Math.min(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.getSize(heightMeasureSpec));
-        
+
         this.getLayoutParams().height = diameter;
         this.getLayoutParams().width = diameter;
-        
+
         setMeasuredDimension(diameter, diameter);
     }
 
@@ -106,9 +107,9 @@ public class WheelView extends ViewGroup {
         float diameter = Math.min(width, height);
         bounds = new RectF(0f, 0f, diameter, diameter);
         bounds.offset((width - bounds.width()) / 2, (height - bounds.height()) / 2);
-        
+
         labelPaint.setTextSize(getFontSize());
-        
+
         getLocationOnScreen(screenLocation);
 
         pin.reLayout();
@@ -136,7 +137,7 @@ public class WheelView extends ViewGroup {
         final float unitRotation = 360 / moodLabels.length;
         final float pivotX = bounds.centerX();
         final float pivotY = bounds.centerY();
-        
+
         canvas.save();
         canvas.rotate(3f / 2 * unitRotation, pivotX, pivotY);
         for (int i = 0; i < moodLabels.length / 2; i++) {
@@ -148,8 +149,11 @@ public class WheelView extends ViewGroup {
         canvas.restore();
     }
 
-    public List<MoodSelection> getSelections() {
-        return null;
+    public Set<MoodSelection> getSelections() {
+        HashSet<MoodSelection> result = new HashSet<MoodSelection>();
+        result.add(pin.getSelection());
+        return result;
+
     }
 
     protected float getFontSize() {
@@ -159,7 +163,7 @@ public class WheelView extends ViewGroup {
     protected int getPinRadius() {
         return (int) (PIN_RADIUS_MODIFIER * bounds.width());
     }
-    
+
     protected int getRelativeX(MotionEvent e) {
         return (int) (e.getRawX() - screenLocation[0]);
     }
@@ -168,12 +172,11 @@ public class WheelView extends ViewGroup {
         return (int) (e.getRawY() - screenLocation[1]);
     }
 
-    
     public class MoodSelectionView extends View implements OnTouchListener {
 
         protected final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        protected final MoodSelection selection; 
-        
+        protected final MoodSelection selection;
+
         public MoodSelectionView(Context context, MoodSelection selection) {
             super(context);
             this.selection = selection;
@@ -184,23 +187,23 @@ public class WheelView extends ViewGroup {
             setWillNotDraw(false);
             setOnTouchListener(this);
         }
-        
+
         protected int getLeft(int x) {
             return x - getPinRadius();
         }
-        
+
         protected int getTop(int y) {
             return y - getPinRadius();
         }
-        
+
         protected int getBottom(int y) {
             return y + getPinRadius();
         }
-        
+
         protected int getRight(int x) {
             return x + getPinRadius();
         }
-        
+
         @Override
         protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
             setMeasuredDimension(2 * getPinRadius(), 2 * getPinRadius());
@@ -208,7 +211,7 @@ public class WheelView extends ViewGroup {
 
         @Override
         protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-            super.onSizeChanged(w, h, oldw, oldh);            
+            super.onSizeChanged(w, h, oldw, oldh);
         }
 
         @Override
@@ -233,41 +236,41 @@ public class WheelView extends ViewGroup {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             getParent().requestDisallowInterceptTouchEvent(true);
-            
+
             final int x = getRelativeX(event) - (int) bounds.centerX();
             final int y = getRelativeY(event) - (int) bounds.centerY();
-            
+
             selection.setR(calculateR(x, y));
             selection.setTheta(calculateTheta(x, y));
-            
+
             reLayout();
-            
+
             return true;
         }
-        
+
         protected double calculateR(int x, int y) {
             return Math.sqrt(y * y + x * x) / (bounds.width() / 2);
         }
-        
+
         protected double calculateTheta(int x, int y) {
             return Math.atan2(y, x);
         }
-        
+
         protected int getX(MoodSelection selection) {
             return (int) (bounds.centerX() + (selection.getR() * bounds.width() / 2 * Math.cos(selection.getTheta())));
         }
-        
+
         protected int getY(MoodSelection selection) {
             return (int) (bounds.centerY() + (selection.getR() * bounds.width() / 2 * Math.sin(selection.getTheta())));
         }
-        
+
         protected void reLayout() {
-            this.layout(
-                getLeft(getX(selection)), 
-                getTop(getY(selection)), 
-                getRight(getX(selection)), 
-                getBottom(getY(selection))
-            );
+            this.layout(getLeft(getX(selection)), getTop(getY(selection)), getRight(getX(selection)),
+                    getBottom(getY(selection)));
+        }
+
+        public MoodSelection getSelection() {
+            return selection;
         }
     }
 }

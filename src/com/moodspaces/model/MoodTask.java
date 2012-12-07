@@ -25,13 +25,13 @@ public class MoodTask extends Model {
     public void setName(String name) {
         this.name.set(name);
     }
-    
+
     @Override
     public String toString() {
-        return "[MoodTask " + getId() + "] " + getName();
+        return getName();
     }
 
-    public static QuerySet<MoodTask> findAll(Context context) {
+    public static QuerySet<MoodTask> objects(Context context) {
         return objects(context, MoodTask.class);
     }
 }

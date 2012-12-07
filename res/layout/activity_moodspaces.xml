@@ -4,49 +4,53 @@
     android:layout_height="match_parent"
     android:gravity="center_vertical"
     android:padding="5dp" >
-    
+
     <TextView
-        android:id="@+id/text_stats"
+        android:id="@+id/moodspaces_text_stats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="@string/moodspaces_text_stats_text"
-        android:textSize="16sp"
         android:paddingBottom="10dp"
-        android:textAllCaps="true" />
+        android:text="@string/moodspaces_text_stats_text"
+        android:textAllCaps="true"
+        android:textSize="16sp" />
 
     <Button
-        android:id="@+id/button_moodspots"
+        android:id="@+id/moodspaces_button_moodspots"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/text_stats"
-        android:text="@string/moodspaces_button_moodspots_text" />
+        android:layout_below="@+id/moodspaces_text_stats"
+        android:onClick="startMoodSpots"
+        android:text="@string/moodspots_activity_title" />
 
     <Button
-        android:id="@+id/button_moodpeeps"
+        android:id="@+id/moodspaces_button_moodpeeps"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/button_moodspots"
-        android:text="@string/moodspaces_button_moodpeeps_text"  />
+        android:layout_below="@+id/moodspaces_button_moodspots"
+        android:onClick="startMoodPeeps"
+        android:text="@string/moodpeeps_activity_title" />
 
     <Button
-        android:id="@+id/button_moodtimes"
+        android:id="@+id/moodspaces_button_moodtimes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/button_moodpeeps"
-        android:text="@string/moodspaces_button_moodtimes_text" />
+        android:layout_below="@+id/moodspaces_button_moodpeeps"
+        android:onClick="startMoodTimes"
+        android:text="@string/moodtimes_activity_title" />
 
     <Button
-        android:id="@+id/button_moodtasks"
+        android:id="@+id/moodspaces_button_moodtasks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/button_moodtimes"
-        android:text="@string/moodspaces_button_moodtasks_text"
-        android:enabled="false" />
+        android:layout_below="@+id/moodspaces_button_moodtimes"
+        android:enabled="false"
+        android:onClick="startMoodTasks"
+        android:text="@string/moodtasks_activity_title" />
 
 </RelativeLayout>

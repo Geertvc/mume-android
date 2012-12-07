@@ -20,8 +20,6 @@ import com.orm.androrm.Model;
 
 public class MoodSpacesService extends Service {
 
-    private static final String DB_NAME = "moodspaces.db";
-    
     private MoodSpacesBinder binder = new MoodSpacesBinder();
     private DatabaseAdapter adapter;
 
@@ -34,18 +32,35 @@ public class MoodSpacesService extends Service {
         }
     }
 
+    public void createTask(MoodTask moodTask) {
+        if (moodTask.save(getApplicationContext())) {
+            Toast.makeText(this, "Task created!", Toast.LENGTH_SHORT).show();
+            Log.i(getClass().getSimpleName(), "Task saved!");
+        } else {
+            Log.e(getClass().getSimpleName(), "Task not saved!");
+        }
+    }
+
+    public void addEntry(MoodEntry moodEntry) throws Exception {
+        if(moodEntry.save(getApplicationContext())) {
+            Toast.makeText(this, "Entry saved!", Toast.LENGTH_SHORT).show();
+            Log.i(getClass().getSimpleName(), "Entry saved!");
+        } else {
+            throw new Exception("Entry not stored");
+        }
+    }
+
     @Override
     public IBinder onBind(Intent intent) {
         if (adapter == null) {
-            DatabaseAdapter.setDatabaseName(DB_NAME);
             adapter = new DatabaseAdapter(getApplicationContext());
-//            Set<Class<? extends Model>> models = new HashSet<Class<? extends Model>>();
-//            models.add(MoodEntry.class);
-//            models.add(MoodPerson.class);
-//            models.add(MoodSelection.class);
-//            models.add(MoodSpot.class);
-//            models.add(MoodTask.class);
-//            adapter.setModels(models);
+            Set<Class<? extends Model>> models = new HashSet<Class<? extends Model>>();
+            models.add(MoodEntry.class);
+            models.add(MoodPerson.class);
+            models.add(MoodSelection.class);
+            models.add(MoodSpot.class);
+            models.add(MoodTask.class);
+            adapter.setModels(models);
         }
 
         Log.d(getClass().getSimpleName(), "Bind Request Received!");

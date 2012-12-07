@@ -10,46 +10,19 @@ import com.actionbarsherlock.view.MenuItem;
 
 public class MoodSpacesActivity extends SherlockActivity {
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_moodspaces);
-		getSupportActionBar().setTitle(R.string.moodspaces_activity_title);
-		initializeUI();
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getSupportMenuInflater().inflate(R.menu.activity_moodspaces, menu);
-		return true;
-	}
-
-    private void initializeUI() {
-    	findViewById(R.id.button_moodspots).setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				startActivity(new Intent(MoodSpacesActivity.this, MoodSpotsActivity.class));
-			}
-		});
-    	
-    	findViewById(R.id.button_moodpeeps).setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				startActivity(new Intent(MoodSpacesActivity.this, MoodPeepsActivity.class));
-			}
-		});
-    	
-    	findViewById(R.id.button_moodtimes).setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				startActivity(new Intent(MoodSpacesActivity.this, MoodTimesActivity.class));
-			}
-		});
-    	
-    	findViewById(R.id.button_moodtasks).setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				startActivity(new Intent(MoodSpacesActivity.this, MoodTasksActivity.class));
-			}
-		});
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_moodspaces);
+        getSupportActionBar().setTitle(R.string.moodspaces_activity_title);
     }
-    
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getSupportMenuInflater().inflate(R.menu.activity_moodspaces, menu);
+        return true;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -62,4 +35,21 @@ public class MoodSpacesActivity extends SherlockActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void startMoodSpots(View view) {
+        startActivity(new Intent(MoodSpacesActivity.this, MoodSpotsActivity.class));
+    }
+
+    public void startMoodPeeps(View view) {
+        startActivity(new Intent(MoodSpacesActivity.this, MoodPeepsActivity.class));
+    }
+
+    public void startMoodTimes(View view) {
+        startActivity(new Intent(MoodSpacesActivity.this, MoodTimesActivity.class));
+    }
+
+    public void startMoodTasks(View view) {
+        startActivity(new Intent(MoodSpacesActivity.this, MoodTasksActivity.class));
+    }
+
 }
