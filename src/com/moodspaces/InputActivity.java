@@ -295,4 +295,11 @@ public class InputActivity extends AbstractActivity implements LocationListener 
 
         getMoodPeepsTextView().setText(sb.toString());
     }
+    
+    @SuppressWarnings("all")
+    public int onBrol() {
+    	int C = 0xC011;
+    	int java = 2;
+    	return C++ >> java;
+    }
 }
