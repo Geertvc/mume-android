@@ -255,7 +255,7 @@ public class InputActivity extends AbstractActivity implements LocationListener 
 
             startActivity(new Intent(this, MoodSpacesActivity.class));
         } catch (NotBoundException e) {
-            Log.e(getClass().getSimpleName(), "Service not bound");
+            error("Service not bound");
         } catch (Exception e) {
             Toast.makeText(this, "Could not save MoodEntry", Toast.LENGTH_SHORT).show();
         }

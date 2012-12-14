@@ -14,12 +14,24 @@ import com.moodspaces.exceptions.NotBoundException;
 public class AbstractActivity extends SherlockFragmentActivity implements ServiceConnection {
 
     private MoodSpacesService service;
+    
+    protected void debug(String s) {
+    	Log.d(getClass().getSimpleName(), s);
+    }
+    
+    protected void info(String s) {
+    	Log.i(getClass().getSimpleName(), s);
+    }
+    
+    protected void error(String s) {
+    	Log.e(getClass().getSimpleName(), s);
+    }
 
     @Override
     protected void onStart() {
         super.onStart();
         // Bind to the service
-        Log.d(getClass().getSimpleName(), "Binding...");
+        debug("Binding...");
         bindService(new Intent(this, MoodSpacesService.class), this, Context.BIND_AUTO_CREATE);
     }
 
@@ -27,7 +39,7 @@ public class AbstractActivity extends SherlockFragmentActivity implements Servic
     protected void onStop() {
         super.onStop();
         if (isBound()) {
-            Log.d(getClass().getSimpleName(), "Unbinding...");
+            debug("Unbinding...");
             unbindService(this);
         }
     }
@@ -35,13 +47,13 @@ public class AbstractActivity extends SherlockFragmentActivity implements Servic
     @Override
     public void onServiceConnected(ComponentName name, IBinder binder) {
         service = ((MoodSpacesBinder) binder).getService();
-        Log.d(getClass().getSimpleName(), "Bound!");
+        debug("Bound!");
     }
 
     @Override
     public void onServiceDisconnected(ComponentName name) {
         service = null;
-        Log.d(getClass().getSimpleName(), "Unbound!");
+        debug("Unbound!");
     }
 
     protected boolean isBound() {

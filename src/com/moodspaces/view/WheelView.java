@@ -80,7 +80,7 @@ public class WheelView extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        // do nothing, the childs layout themselves
+        // do nothing, the children layout themselves
     }
 
     /**
