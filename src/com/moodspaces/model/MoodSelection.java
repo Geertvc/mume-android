@@ -1,58 +1,76 @@
 package com.moodspaces.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import android.content.Context;
 
+import com.orm.androrm.Filter;
 import com.orm.androrm.Model;
+import com.orm.androrm.QuerySet;
 import com.orm.androrm.field.DoubleField;
+import com.orm.androrm.field.ForeignKeyField;
+import com.orm.androrm.migration.Migrator;
 
 public class MoodSelection extends Model {
 
-    protected DoubleField r = new DoubleField();
-    protected DoubleField theta = new DoubleField();
+	public static QuerySet<MoodSelection> objects(Context ctx) {
+		return objects(ctx, MoodSelection.class);
+	}
 
-    private Set<MoodSelectionListener> listeners = new HashSet<MoodSelectionListener>();
+	public static QuerySet<MoodSelection> getByEmotion(Context ctx,
+			Emotion emotion) {
+		Filter f = new Filter();
 
-    public MoodSelection() {
-        this(0, 0);
-    }
+		f.is("theta", ">=", "" + emotion.startPhi);
+		f.is("theta", "<", "" + emotion.endPhi);
+		
+		return objects(ctx).filter(f);
+	}
 
-    public MoodSelection(double r, double theta) {
-        super();
-        setR(r);
-        setTheta(theta);
-    }
+	protected DoubleField r = new DoubleField();
+	protected DoubleField theta = new DoubleField();
+	protected ForeignKeyField<MoodEntry> entry = new ForeignKeyField<MoodEntry>(
+			MoodEntry.class);
 
-    public double getR() {
-        return r.get();
-    }
+	public MoodSelection() {
+		this(0, 0);
+	}
 
-    public void setR(double r) {
-        if (r != getR() && r <= 1) {
-            this.r.set(r);
+	public MoodSelection(double r, double theta) {
+		setR(r);
+		setTheta(theta);
+	}
 
-            for (MoodSelectionListener listener : listeners) {
-                listener.onUpdateR(r);
-            }
-        }
-    }
+	public double getR() {
+		return r.get();
+	}
 
-    public double getTheta() {
-        return theta.get();
-    }
+	public void setR(double r) {
+		if (r > 0 && r <= 1) {
+			this.r.set(r);
+		}
+	}
 
-    public void setTheta(double theta) {
-        if (theta != getTheta()) {
-            this.theta.set(theta);
+	public double getTheta() {
+		return theta.get();
+	}
 
-            for (MoodSelectionListener listener : listeners) {
-                listener.onUpdateTheta(theta);
-            }
-        }
-    }
+	public void setTheta(double theta) {
+		this.theta.set(theta);
+	}
 
-    public interface MoodSelectionListener {
-        public void onUpdateR(double r);
-        public void onUpdateTheta(double theta);
-    }
+	public MoodEntry getEntry() {
+		return entry.get();
+	}
+
+	public void setMoodEntry(MoodEntry moodEntry) {
+		entry.set(moodEntry);
+	}
+	
+	@Override
+	protected void migrate(Context ctx) {
+		Migrator<MoodSelection> migrator = new Migrator<MoodSelection>(MoodSelection.class);
+		
+		migrator.addField("entry", new ForeignKeyField<MoodEntry>(MoodEntry.class));
+		
+		migrator.migrate(ctx);
+	}
 }

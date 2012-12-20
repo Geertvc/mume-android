@@ -49,7 +49,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/moodspaces_button_moodtimes"
-        android:enabled="false"
         android:onClick="startMoodTasks"
         android:text="@string/moodtasks_activity_title" />
 

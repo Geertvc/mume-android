@@ -1,7 +1,7 @@
 package com.moodspaces;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedList;
+import java.util.List;
 
 import android.app.Service;
 import android.content.Intent;
@@ -53,8 +53,8 @@ public class MoodSpacesService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         if (adapter == null) {
-            adapter = new DatabaseAdapter(getApplicationContext());
-            Set<Class<? extends Model>> models = new HashSet<Class<? extends Model>>();
+            adapter = DatabaseAdapter.getInstance(getApplicationContext());
+            List<Class<? extends Model>> models = new LinkedList<Class<? extends Model>>();
             models.add(MoodEntry.class);
             models.add(MoodPerson.class);
             models.add(MoodSelection.class);

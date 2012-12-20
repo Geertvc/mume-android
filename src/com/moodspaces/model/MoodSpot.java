@@ -8,6 +8,15 @@ import com.orm.androrm.field.CharField;
 import com.orm.androrm.field.DoubleField;
 
 public class MoodSpot extends Model {
+	
+	public static QuerySet<MoodSpot> objects(Context ctx) {
+		return objects(ctx, MoodSpot.class);
+	}
+	
+	public static MoodSpot getById(Context ctx, int id) {
+		return objects(ctx).get(id);
+	}
+	
     protected CharField name = new CharField(/* optional length */);
     protected DoubleField latitude = new DoubleField();
     protected DoubleField longitude = new DoubleField();
@@ -50,9 +59,5 @@ public class MoodSpot extends Model {
     @Override
     public String toString() {
         return getName();
-    }
-
-    public static final QuerySet<MoodSpot> objects(Context context) {
-        return objects(context, MoodSpot.class);
     }
 }

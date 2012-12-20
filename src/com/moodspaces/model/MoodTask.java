@@ -8,6 +8,14 @@ import com.orm.androrm.field.CharField;
 
 public class MoodTask extends Model {
 
+    public static QuerySet<MoodTask> objects(Context context) {
+        return objects(context, MoodTask.class);
+    }
+    
+    public static MoodTask getById(Context ctx, int id) {
+    	return objects(ctx).get(id);
+    }
+
     protected CharField name = new CharField(/* optional max length */);
 
     public MoodTask() {
@@ -29,9 +37,5 @@ public class MoodTask extends Model {
     @Override
     public String toString() {
         return getName();
-    }
-
-    public static QuerySet<MoodTask> objects(Context context) {
-        return objects(context, MoodTask.class);
     }
 }

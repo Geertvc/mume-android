@@ -7,6 +7,14 @@ import com.orm.androrm.QuerySet;
 import com.orm.androrm.field.CharField;
 
 public class MoodPerson extends Model {
+    
+    public static QuerySet<MoodPerson> objects(Context context) {
+        return objects(context, MoodPerson.class);
+    }
+    
+    public static MoodPerson getById(Context ctx, int id) {
+    	return objects(ctx).get(id);
+    }
 
     protected CharField name = new CharField();
 
@@ -25,9 +33,5 @@ public class MoodPerson extends Model {
 
     public void setName(String name) {
         this.name.set(name);
-    }
-    
-    public static QuerySet<MoodPerson> objects(Context context) {
-        return objects(context, MoodPerson.class);
     }
 }

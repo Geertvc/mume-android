@@ -15,7 +15,11 @@ import com.orm.androrm.field.OneToManyField;
 
 public class MoodEntry extends Model {
 
-    protected DateField date = new DateField();
+    public static QuerySet<MoodEntry> objects(Context context) {
+	    return objects(context, MoodEntry.class);
+	}
+
+	protected DateField date = new DateField();
     protected ForeignKeyField<MoodTask> moodTask = new ForeignKeyField<MoodTask>(MoodTask.class);
     protected ForeignKeyField<MoodSpot> moodSpot = new ForeignKeyField<MoodSpot>(MoodSpot.class);
     protected OneToManyField<MoodEntry, MoodSelection> moodSelections = new OneToManyField<MoodEntry, MoodSelection>(
@@ -52,16 +56,16 @@ public class MoodEntry extends Model {
         this.moodSpot.set(moodSpot);
     }
 
-    public static QuerySet<MoodEntry> objects(Context context) {
-        return objects(context, MoodEntry.class);
-    }
-
     public void addSelections(Set<MoodSelection> selections) {
         this.moodSelections.addAll(selections);
+        for(MoodSelection selection: selections) {
+        	selection.setMoodEntry(this);
+        }
     }
 
     public void addSelection(MoodSelection selection) {
         this.moodSelections.add(selection);
+        selection.setMoodEntry(this);
     }
 
     public QuerySet<MoodSelection> getMoodSelections(Context context) {

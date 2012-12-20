@@ -1,0 +1,84 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:accordion="http://schemas.android.com/apk/res-auto/com.sentaca.android.accordion"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:id="@+id/accordion_view_container" >
+
+    <com.sentaca.android.accordion.widget.AccordionView
+        android:id="@+id/accordion_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        accordion:header_layout_fold_button_id="@id/foldButton"
+        accordion:header_layout_id="@layout/accordion_header"
+        accordion:header_layout_label_id="@id/foldText"
+        accordion:section_bottom="@layout/accordion_footer"
+        accordion:section_container="@layout/accordion_section"
+        accordion:section_container_parent="@id/section_content"
+        accordion:section_headers="@array/emotions"
+        android:background="#fff5f5f5"
+        android:orientation="vertical" >
+        
+        <!-- Note:
+        	Make sure that the order of the emotions here is the same as in @array/emotions
+        -->
+
+        <LinearLayout
+            android:id="@+id/emotions_anger"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/emotions_anticipation"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/emotions_disgust"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/emotions_fear"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/emotions_joy"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/emotions_sadness"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/emotions_surpise"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/emotions_trust"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+    </com.sentaca.android.accordion.widget.AccordionView>
+
+</ScrollView>
