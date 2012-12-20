@@ -55,7 +55,7 @@ public class QueryBuilder {
 			
 	) {
 		
-		T instance = Model.getInstance(clazz);
+		T instance = Model.getInstace(clazz);
 		
 		if(instance != null) {
 			Object fieldInstance = getFieldInstance(clazz, instance, fields.get(0));
@@ -103,7 +103,7 @@ public class QueryBuilder {
 		if(fields.size() == 1) {
 			String fieldName = fields.get(0);
 			
-			T instance = Model.getInstance(clazz);
+			T instance = Model.getInstace(clazz);
 			
 			if(instance != null) {
 				Object o = getFieldInstance(clazz, instance, fieldName);

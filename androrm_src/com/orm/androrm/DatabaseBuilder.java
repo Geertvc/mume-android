@@ -40,7 +40,7 @@ import android.util.Log;
  */
 public class DatabaseBuilder {
 
-	private static final String TAG = "ANDRORM:DATABASE:BUILDER";
+	private static final String TAG = "ANDORM:DATABASE:BUILDER";
 	
 	public static final String getTableName(Class<?> clazz) {
 		return clazz.getSimpleName().toLowerCase();
@@ -55,7 +55,7 @@ public class DatabaseBuilder {
 					return ModelCache.getTableDefinitions(clazz);
 				}
 
-				T object = Model.getInstance(clazz);
+				T object = Model.getInstace(clazz);
 				TableDefinition definition = new TableDefinition(getTableName(clazz));
 				
 				getFieldDefinitions(object, clazz, definition);
@@ -187,7 +187,7 @@ public class DatabaseBuilder {
 	private static final<T extends Model> List<TableDefinition> getRelationDefinitions(Class<T> clazz) {
 		List<TableDefinition> definitions = new ArrayList<TableDefinition>();
 		
-		T object = Model.getInstance(clazz);
+		T object = Model.getInstace(clazz);
 		getRelationDefinitions(object, clazz, definitions);
 		
 		return definitions;

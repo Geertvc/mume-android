@@ -26,7 +26,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -131,7 +130,7 @@ public abstract class Model {
 			
 	) {
 		
-		T object = getInstance(clazz);
+		T object = getInstace(clazz);
 		
 		try {
 			fillUpData(object, clazz, c);
@@ -172,7 +171,7 @@ public abstract class Model {
 		Field fk = null;
 		
 		try {
-			fk = getForeignKeyField(targetClass, originClass, getInstance(originClass));
+			fk = getForeignKeyField(targetClass, originClass, getInstace(originClass));
 		}  catch (IllegalAccessException e) {
 			Log.e(TAG, "an exception has been thrown trying to gather the foreign key field pointing to " 
 					+ targetClass.getSimpleName() 
@@ -216,12 +215,17 @@ public abstract class Model {
 				+ getEligableFields(instance.getClass(), instance).toString());
 	}
 	
-	protected static final void runMigrations(Context context, Set<Class<? extends Model>> models) {
+	protected static final void runMigrations(Context context, List<Class<? extends Model>> models) {
+		DatabaseAdapter adapter = DatabaseAdapter.getInstance(context);
+		adapter.beginTransaction();
+		
 		for(Class<? extends Model> model : models) {
-			Model instance = getInstance(model);
+			Model instance = getInstace(model);
 			
 			instance.migrate(context);
 		}
+		
+		adapter.commitTransaction();
 	}
 	
 	protected static final <T extends Model> Field getField(
@@ -307,7 +311,7 @@ public abstract class Model {
 		return fk;
 	}
 	
-	protected static final <T extends Model> T getInstance(Class<T> clazz) {
+	protected static final <T extends Model> T getInstace(Class<T> clazz) {
 		T instance = null;
 		
 		try {
@@ -409,7 +413,7 @@ public abstract class Model {
 			Where where = new Where();
 			where.and(PK, getId());
 			
-			DatabaseAdapter adapter = new DatabaseAdapter(context);
+			DatabaseAdapter adapter = DatabaseAdapter.getInstance(context);
 			int affectedRows = adapter.delete(DatabaseBuilder.getTableName(getClass()), where);
 			
 			if(affectedRows != 0) {
@@ -553,7 +557,7 @@ public abstract class Model {
 		Where where = new Where();
 		where.and(PK, id);
 		
-		DatabaseAdapter adapter = new DatabaseAdapter(context);
+		DatabaseAdapter adapter = DatabaseAdapter.getInstance(context);
 		int rowID = adapter.doInsertOrUpdate(DatabaseBuilder.getTableName(getClass()), values, where);
 
 		if(rowID == -1) {
@@ -590,7 +594,7 @@ public abstract class Model {
 		ManyToManyField<T, ?> m = (ManyToManyField<T, ?>) field;
 		List<? extends Model> targets = m.getCachedValues();
 		
-		DatabaseAdapter adapter = new DatabaseAdapter(context);
+		DatabaseAdapter adapter = DatabaseAdapter.getInstance(context);
 		
 		for(Model target: targets) {
 			/*
