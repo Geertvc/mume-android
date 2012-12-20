@@ -7,6 +7,7 @@ import android.view.View;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.moodspaces.controller.DatabaseController;
 
 public class MoodSpacesActivity extends SherlockActivity {
 
@@ -15,6 +16,8 @@ public class MoodSpacesActivity extends SherlockActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moodspaces);
         getSupportActionBar().setTitle(R.string.moodspaces_activity_title);
+        
+		DatabaseController.initDatabaseController(this);
     }
 
     @Override

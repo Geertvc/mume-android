@@ -7,6 +7,7 @@ import android.view.View;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.moodspaces.controller.DatabaseController;
 
 public class MoodTimesActivity extends SherlockActivity {
 
@@ -16,6 +17,7 @@ public class MoodTimesActivity extends SherlockActivity {
 		setContentView(R.layout.activity_moodtimes);
 		getSupportActionBar().setTitle(R.string.moodtimes_activity_title);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		DatabaseController.initDatabaseController(this);
 	}
 
 	@Override

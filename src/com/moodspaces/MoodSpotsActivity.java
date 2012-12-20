@@ -1,7 +1,7 @@
 package com.moodspaces;
 
+import com.moodspaces.controller.MoodSpotController;
 import com.moodspaces.model.MoodEntry;
-import com.moodspaces.model.MoodSpot;
 
 
 public class MoodSpotsActivity extends AbstractAccordionActivity {
@@ -11,12 +11,12 @@ public class MoodSpotsActivity extends AbstractAccordionActivity {
 	}
 
 	@Override
-	protected int getId(MoodEntry entry) {
+	protected long getId(MoodEntry entry) {
 		return entry.getMoodSpot().getId();
 	}
 
 	@Override
-	protected String getName(int id) {
-		return MoodSpot.getById(this, id).getName();
+	protected String getName(long id) {
+		return MoodSpotController.getById(id).getName();
 	}
 }

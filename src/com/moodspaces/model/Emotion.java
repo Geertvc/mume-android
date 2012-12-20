@@ -24,7 +24,7 @@ public enum Emotion {
 	private Emotion(String name, int id, int startPhi) {
 		this.id = id;
 		this.startPhi = startPhi * UNIT_ANGLE;
-		this.endPhi = startPhi + UNIT_ANGLE;
+		this.endPhi = this.startPhi + UNIT_ANGLE;
 		this.name = name;
 	}
 
