@@ -3,4 +3,4 @@ gen/*
 .settings/*
 
 
-/res/values/strings.xml
+AndroidManifest.xml

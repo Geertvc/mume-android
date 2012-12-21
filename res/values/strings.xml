@@ -62,6 +62,15 @@
     <string name="dialog_activity_button_positive">Create Activity</string>
     <string name="dialog_activity_button_negative">Cancel</string>
     
-    <!-- API Key Strings -->
-    <string name="google_api_key"></string>
+    <!-- Emotions -->
+    <string-array name="emotions">
+        <item>Anger</item>
+        <item>Anticipation</item>
+        <item>Disgust</item>
+        <item>Fear</item>
+        <item>Joy</item>
+        <item>Sadness</item>
+        <item>Surprise</item>
+        <item>Trust</item>
+    </string-array>
 </resources>

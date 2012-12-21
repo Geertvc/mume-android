@@ -12,6 +12,7 @@ import com.moodspaces.model.MoodEntryPersonMap;
 import com.moodspaces.model.MoodEntryPersonMapDao;
 import com.moodspaces.model.MoodPerson;
 import com.moodspaces.model.MoodSelection;
+import com.moodspaces.model.MoodSpot;
 import com.moodspaces.util.Collections;
 import com.moodspaces.util.Collections.Map;
 
@@ -80,5 +81,11 @@ public class MoodEntryController {
 			
 			entryPersonMapDao.insert(map);
 		}
+	}
+	
+	public static List<MoodEntry> getBySpot(MoodSpot spot) {
+		return entryDao.queryBuilder()
+				.where(MoodEntryDao.Properties.SpotId.eq(spot.getId()))
+				.list();
 	}
 }
